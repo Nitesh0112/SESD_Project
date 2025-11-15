@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Hostel Management System | SR University</title>
+
+  <!-- Bootstrap & AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link href="assets/css/style.css" rel="stylesheet"/>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .navbar { transition: background-color 0.3s ease; }
+    .navbar.scrolled { background-color: rgba(0,0,0,0.9) !important; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url('https://source.unsplash.com/1600x700/?university,hostel,students') center/cover no-repeat;
+      color: white;
+      padding: 130px 0;
+      text-align: center;
+    }
+
+    .hero h1 { font-weight: 700; letter-spacing: 1px; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; }
+    .hero .btn { font-weight: 600; transition: all 0.3s; }
+    .hero .btn:hover { transform: scale(1.05); }
+
+    .section-title { font-weight: 700; text-transform: uppercase; margin-bottom: 40px; color: #222; }
+    .section-title::after { content: ""; display: block; width: 80px; height: 3px; margin: 8px auto; background: #ff8800; }
+
+    .card {
+      border: none; border-radius: 15px;
+      transition: all 0.3s ease; cursor: pointer;
+      text-align: center;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+    .card-title { color: #ff8800; font-weight: 600; margin-top: 10px; }
+
+    footer { background: #222; color: white; padding: 25px 0; }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">SHMS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#mainLoginModal"><i class="fa fa-right-to-bracket me-1"></i>Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero" class="hero d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="zoom-in" data-aos-duration="1000">
+      <h1 class="display-4 fw-bold">Smart Hostel Management System</h1>
+      <p class="lead">Digitizing hostel life — manage outpasses, complaints, rooms, and more, all in one system.</p>
+      <div class="mt-3">
+        <a href="#features" class="btn btn-warning btn-lg me-2">Explore Features</a>
+        <button class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#mainLoginModal">Login / Dashboard</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-5">
+    <div class="container text-center">
+      <h2 class="section-title">Key Modules</h2>
+      <div class="row g-4 mt-4">
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="card p-4 h-100" onclick="location.href='outpass.html'">
+            <h5 class="card-title">Outpass Management</h5>
+            <p>Students request outings; wardens approve them; security verifies at the gate.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card p-4 h-100" onclick="location.href='room-allocation.html'">
+            <h5 class="card-title">Room Allocation</h5>
+            <p>Admins assign rooms efficiently based on availability and capacity with live tracking.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card p-4 h-100" onclick="location.href='complaint-tracking.html'">
+            <h5 class="card-title">Complaint Tracking</h5>
+            <p>Students raise maintenance complaints and track resolution progress through the dashboard.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card p-4 h-100" onclick="location.href='visitor-management.html'">
+            <h5 class="card-title">Visitor Management</h5>
+            <p>Security digitally records visitor details, ensuring transparent and secure access.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="card p-4 h-100" onclick="location.href='mess-feedback.html'">
+            <h5 class="card-title">Mess Feedback</h5>
+            <p>Students submit food ratings and comments; admins analyze satisfaction trends.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+          <div class="card p-4 h-100" onclick="location.href='notice-board.html'">
+            <h5 class="card-title">Notice Board</h5>
+            <p>Admins publish digital notices instantly viewable to all hostel residents.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick role links -->
+  <section class="py-3 bg-white">
+    <div class="container text-center" data-aos="fade-up">
+      <h5 class="mb-3">Quick access</h5>
+      <div class="d-flex justify-content-center gap-2 flex-wrap">
+        <button class="btn btn-outline-primary" data-role="Student">Student Login</button>
+        <button class="btn btn-outline-secondary" data-role="Warden">Warden Login</button>
+        <button class="btn btn-outline-warning" data-role="Admin">Admin Login</button>
+        <button class="btn btn-outline-dark" data-role="Security">Security Login</button>
+      </div>
+      <div class="text-muted-small mt-2">Click any role to open the unified login modal with the role pre-selected.</div>
+    </div>
+  </section>
+
+  <!-- Embedded SPA role sections (hidden by default) -->
+  <!-- Admin Section -->
+  <section id="admin-section" data-section class="d-none">
+    <div class="wrap d-flex mt-3">
+      <aside class="sidebar col-12 col-lg-3">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link active" href="#"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="#students"><i class="fa fa-users me-2"></i>Manage Students</a></li>
+          <li class="nav-item"><a class="nav-link" href="#rooms"><i class="fa fa-door-closed me-2"></i>Rooms</a></li>
+          <li class="nav-item"><a class="nav-link" href="#complaints"><i class="fa fa-exclamation-circle me-2"></i>Complaints</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reports"><i class="fa fa-chart-line me-2"></i>Reports</a></li>
+          <li class="nav-item mt-3"><button class="btn btn-sm btn-outline-secondary btn-logout">Logout</button></li>
+        </ul>
+      </aside>
+      <main class="col-12 col-lg-9 main-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>Admin Dashboard</h3>
+          <div>
+            <button class="btn btn-sm btn-outline-secondary me-2" id="generateReportBtn"><i class="fa fa-file-csv me-1"></i>Generate Report</button>
+            Welcome, <span class="user-email">admin@shms.test</span>
+          </div>
+        </div>
+  <div class="row" id="statsRow" data-aos="fade-up">
+          <div class="col-6 col-md-3 mb-3"><div class="p-3 stat-card"><h5>120</h5><div class="text-muted-small">Total Students</div></div></div>
+          <div class="col-6 col-md-3 mb-3"><div class="p-3 stat-card"><h5>24</h5><div class="text-muted-small">Pending Complaints</div></div></div>
+          <div class="col-6 col-md-3 mb-3"><div class="p-3 stat-card"><h5>8</h5><div class="text-muted-small">Available Rooms</div></div></div>
+          <div class="col-6 col-md-3 mb-3"><div class="p-3 stat-card"><h5>5</h5><div class="text-muted-small">Pending Outpasses</div></div></div>
+        </div>
+
+  <div class="card panel mb-3" data-aos="fade-up">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Students</h5>
+            <div>
+              <button class="btn btn-outline-secondary btn-sm me-2" id="saveRoomBtn" data-bs-toggle="modal" data-bs-target="#addRoomModal"><i class="fa fa-plus me-1"></i> Add Room</button>
+              <button class="btn btn-accent btn-sm" data-bs-toggle="modal" data-bs-target="#addNoticeModal"><i class="fa fa-sticky-note me-1"></i> Add Notice</button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead class="table-light"><tr><th>ID</th><th>Name</th><th>Room</th><th>Email</th><th>Actions</th></tr></thead>
+              <tbody id="studentsTbody">
+                <!-- SAMPLE DATA (replace with backend fetch) -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+  <div class="card panel mb-3" data-aos="fade-up">
+          <div class="card-body">
+            <h5>Complaints</h5>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead><tr><th>#</th><th>Category</th><th>Student</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody id="complaintsTbody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Room Modal (simple inline) -->
+        <div class="modal fade" id="addRoomModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Add Room</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
+          <form id="addRoomForm"><div class="form-floating mb-2"><input id="roomNo" class="form-control" placeholder="Room No"><label for="roomNo">Room Number</label></div><div class="form-floating mb-2"><input id="roomBlock" class="form-control" placeholder="Block/Floor"><label for="roomBlock">Block/Floor</label></div></form>
+        </div><div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" id="saveRoomBtnModal">Save Room</button></div></div></div></div>
+
+        <!-- Add Notice Modal -->
+        <div class="modal fade" id="addNoticeModal" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Add Notice</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
+          <form id="adminNoticeForm">
+            <div class="form-floating mb-2"><input id="noticeTitleAdmin" class="form-control" placeholder="Title"><label for="noticeTitleAdmin">Title</label></div>
+            <div class="form-floating mb-2"><select id="noticeCategoryAdmin" class="form-select"><option>General</option><option>Event</option><option>Maintenance</option></select><label for="noticeCategoryAdmin">Category</label></div>
+            <div class="form-floating mb-2"><textarea id="noticeContentAdmin" class="form-control" style="height:120px" placeholder="Content"></textarea><label for="noticeContentAdmin">Content</label></div>
+          </form>
+        </div><div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" id="postAdminNotice">Publish</button></div></div></div></div>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- Student Section -->
+  <section id="student-section" data-section class="d-none">
+    <div class="wrap d-flex mt-3">
+      <aside class="sidebar col-12 col-lg-3">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link active" href="#profile"><i class="fa fa-user me-2"></i>Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="#complaints"><i class="fa fa-exclamation-circle me-2"></i>Complaints</a></li>
+          <li class="nav-item"><a class="nav-link" href="#outpass"><i class="fa fa-road me-2"></i>Outpass Request</a></li>
+          <li class="nav-item mt-3"><button class="btn btn-sm btn-outline-secondary btn-logout">Logout</button></li>
+        </ul>
+      </aside>
+      <main class="col-12 col-lg-9 main-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>Student Dashboard</h3>
+          <div>Welcome, <span class="user-email">student@shms.test</span></div>
+        </div>
+
+  <div class="card panel mb-3" data-aos="fade-up">
+          <div class="card-body">
+            <h5>Profile</h5>
+            <div class="row"><div class="col-md-4"><div class="p-3 stat-card"><h6>Ravi Kumar</h6><div class="text-muted-small">Room 101</div></div></div><div class="col-md-8"><div class="mt-2">Email: <span class="user-email">ravi@uni.edu</span></div></div></div>
+          </div>
+        </div>
+
+        <div id="complaints" class="card panel mb-3">
+          <div class="card-body">
+            <h5>Submit a Complaint</h5>
+            <form id="complaintForm">
+              <div class="form-floating mb-2"><select id="complaintCategory" class="form-select"><option>Electricity</option><option>Wi-Fi</option><option>Plumbing</option></select><label for="complaintCategory">Category</label></div>
+              <div class="form-floating mb-2"><textarea id="complaintText" class="form-control" style="height:100px" placeholder="Describe your complaint"></textarea><label for="complaintText">Details</label></div>
+              <div class="d-flex justify-content-end"><button class="btn btn-accent" id="submitComplaint">Submit</button></div>
+            </form>
+          </div>
+        </div>
+
+        <div id="outpass" class="card panel mb-3">
+          <div class="card-body">
+            <h5>Request Outpass</h5>
+            <form id="outpassForm">
+              <div class="form-floating mb-2"><select id="outType" class="form-select"><option>Day Outing</option><option>Home Outing</option></select><label for="outType">Outpass Type</label></div>
+              <div class="form-floating mb-2"><input id="outDate" type="date" class="form-control" placeholder="Date"><label for="outDate">Date</label></div>
+              <div class="form-floating mb-2"><input id="outTime" type="time" class="form-control" placeholder="Time"><label for="outTime">Expected Time</label></div>
+              <div class="form-floating mb-2"><textarea id="outReason" class="form-control" placeholder="Reason" style="height:100px"></textarea><label for="outReason">Reason</label></div>
+              <div class="d-flex justify-content-end"><button class="btn btn-accent" id="submitOutpass">Apply</button></div>
+            </form>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- Warden Section -->
+  <section id="warden-section" data-section class="d-none">
+    <div class="wrap d-flex mt-3">
+      <aside class="sidebar col-12 col-lg-3">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link active" href="#"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="#outpasses"><i class="fa fa-road me-2"></i>Approve Outpasses</a></li>
+          <li class="nav-item"><a class="nav-link" href="#complaints"><i class="fa fa-exclamation-circle me-2"></i>Resolve Complaints</a></li>
+          <li class="nav-item mt-3"><button class="btn btn-sm btn-outline-secondary btn-logout">Logout</button></li>
+        </ul>
+      </aside>
+      <main class="col-12 col-lg-9 main-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>Warden Dashboard</h3>
+          <div>Welcome, <span class="user-email">warden@shms.test</span></div>
+        </div>
+        <div class="row mb-3"><div class="col-md-4 mb-3"><div class="p-3 stat-card"><h6>Pending Outpasses</h6><h4>5</h4></div></div><div class="col-md-4 mb-3"><div class="p-3 stat-card"><h6>Pending Complaints</h6><h4>12</h4></div></div></div>
+
+        <div id="outpasses" class="card panel mb-3"><div class="card-body"><h5>Pending Outpasses</h5><div class="table-responsive"><table class="table table-sm"><thead><tr><th>#</th><th>Student</th><th>Date</th><th>Type</th><th>Action</th></tr></thead><tbody id="outpassTbody"></tbody></table></div></div></div>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- Security Section -->
+  <section id="security-section" data-section class="d-none">
+    <div class="wrap d-flex mt-3">
+      <aside class="sidebar col-12 col-lg-3">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link active" href="#visitor"><i class="fa fa-user-clock me-2"></i>Visitor Entry</a></li>
+          <li class="nav-item"><a class="nav-link" href="#verify"><i class="fa fa-id-badge me-2"></i>Verify Outpass</a></li>
+          <li class="nav-item mt-3"><button class="btn btn-sm btn-outline-secondary btn-logout">Logout</button></li>
+        </ul>
+      </aside>
+      <main class="col-12 col-lg-9 main-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3>Security Dashboard</h3>
+          <div>Welcome, <span class="user-email">security@shms.test</span></div>
+        </div>
+
+        <div class="card panel mb-3"><div class="card-body"><h5>Visitor Registration</h5><form id="visitorForm"><div class="row"><div class="col-md-6 form-floating mb-2"><input id="vName" class="form-control" placeholder="Name"><label for="vName">Visitor Name</label></div><div class="col-md-6 form-floating mb-2"><input id="vPhone" class="form-control" placeholder="Phone"><label for="vPhone">Phone</label></div></div><div class="form-floating mb-2"><input id="vPurpose" class="form-control" placeholder="Purpose"><label for="vPurpose">Purpose</label></div><div class="form-floating mb-2"><input id="vToSee" class="form-control" placeholder="Student Name"><label for="vToSee">To meet (Student)</label></div><div class="d-flex justify-content-end"><button class="btn btn-accent" id="registerVisitor">Register</button></div></form></div></div>
+
+  <div id="verify" class="card panel mb-3"><div class="card-body"><h5>Verify Outpass</h5><form id="verifyForm" class="row gy-2 gx-2"><div class="col-md-6 form-floating"><input id="verifyId" class="form-control" placeholder="Outpass ID"><label for="verifyId">Outpass ID or Student Email</label></div><div class="col-md-6 d-flex align-items-end gap-2"><button class="btn btn-accent" id="verifyBtn">Verify</button><button class="btn btn-outline-secondary" id="markReturnedBtn">Mark Returned</button></div></form></div></div>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-5 bg-light text-center">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="mt-3"><strong>Email:</strong> <a href="mailto:ashutosh.intech@gmail.com">ashutosh.intech@gmail.com</a></p>
+      <p><strong>Phone:</strong> +91 79799 12842</p>
+      <p><strong>Address:</strong> SR University Boys Hostel, SR University Campus</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p>© 2025 Smart Hostel Management System | SR University</p>
+    </div>
+  </footer>
+
+  <!-- Unified Login Modal (main page) -->
+  <div class="modal fade" id="mainLoginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login to SHMS</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="loginAlert" class="alert alert-danger d-none"></div>
+          <form id="loginForm">
+            <div class="form-floating">
+              <input class="form-control" id="loginEmail" placeholder="name@example.com" type="email" required>
+              <label for="loginEmail">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input class="form-control" id="loginPassword" placeholder="Password" type="password" required>
+              <label for="loginPassword">Password</label>
+            </div>
+            <div class="form-floating mb-3">
+              <select id="roleSelect" class="form-select">
+                <option>Student</option>
+                <option>Admin</option>
+                <option>Warden</option>
+                <option>Security</option>
+              </select>
+              <label for="roleSelect">Role</label>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="register.html">Register (Students)</a>
+              <button class="btn btn-accent" type="submit">Sign in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Navbar scroll effect
+    window.addEventListener("scroll", () => {
+      document.querySelector(".navbar").classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    // Quick role buttons open modal and pre-select role
+    document.querySelectorAll('[data-role]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const role = btn.dataset.role || 'Student';
+        // ensure modal exists
+        const roleSelect = document.getElementById('roleSelect');
+        if(roleSelect) roleSelect.value = role;
+        const loginModalEl = document.getElementById('mainLoginModal');
+        const bsModal = new bootstrap.Modal(loginModalEl); bsModal.show();
+      });
+    });
+
+    // Initialize AOS after DOM ready
+    document.addEventListener('DOMContentLoaded', ()=> AOS.init({ duration: 900, once: true }));
+  </script>
+</body>
+</html>

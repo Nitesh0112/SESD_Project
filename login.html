@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | SHMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="" crossorigin="anonymous" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.css"></script>
+  <style> body{display:flex;align-items:center;justify-content:center;height:100vh;padding:20px} .auth-card{max-width:980px;width:100%}
+  .left-hero{background:linear-gradient(180deg,#ffb366,#ff8800);color:#fff;border-top-left-radius:12px;border-bottom-left-radius:12px;padding:28px}
+  </style>
+</head>
+<body>
+  <div class="card auth-card d-flex flex-row shadow">
+    <div class="left-hero col-12 col-md-6 d-none d-md-block">
+      <h2 class="mb-3">Welcome to SHMS</h2>
+      <p>Smart Hostel Management System — Admins, Wardens, Security and Students login from here.</p>
+      <p class="mt-4 small">Use demo accounts: admin@shms.test / any password (>=4 chars)</p>
+    </div>
+    <div class="col-12 col-md-6 p-4">
+      <h4 class="mb-3">Sign in</h4>
+      <div id="loginAlert" class="alert alert-danger d-none" role="alert"></div>
+      <form id="loginForm">
+        <div class="form-floating">
+          <input class="form-control" id="loginEmail" placeholder="name@example.com" type="email" required>
+          <label for="loginEmail">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input class="form-control" id="loginPassword" placeholder="Password" type="password" required>
+          <label for="loginPassword">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+          <select id="roleSelect" class="form-select">
+            <option>Student</option>
+            <option>Admin</option>
+            <option>Warden</option>
+            <option>Security</option>
+          </select>
+          <label for="roleSelect">Role</label>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div><a href="register.html">Register (Students)</a></div>
+          <div><button class="btn btn-accent" type="submit">Sign in</button></div>
+        </div>
+      </form>
+      <div class="text-muted-small">This is a static frontend demo. Replace login flow with a backend API call at <!-- FETCH AUTH FROM BACKEND HERE -->.</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

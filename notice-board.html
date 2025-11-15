@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notice Board | SHMS</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body{background:#f8f9fa;font-family:Poppins,sans-serif;}
+header{background:#ff8800;color:#fff;text-align:center;padding:40px 0 30px 0;margin-bottom:20px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 15px}
+.panel{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+.section-title{color:#ff8800;font-weight:700;margin-bottom:12px}
+.category-list .btn{margin-bottom:8px;text-align:left}
+.notice-card{border-radius:10px;transition:transform .15s ease, box-shadow .15s ease}
+.notice-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.08)}
+.badge-category{background:#ffefdf;color:#c05a00;font-weight:600}
+.muted{color:#6c757d;font-size:0.9rem}
+.no-notices{padding:40px;text-align:center;color:#666}
+.right-panel .card{margin-bottom:12px}
+.small-actions button{padding:.25rem .4rem}
+.search-input{max-width:420px}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top">
+  <div class="container-fluid wrap">
+    <a class="navbar-brand fw-bold text-white" href="index.html">SHMS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="visitor-management.html">Visitor</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="complaint-tracking.html">Complaints</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="text-white">
+  <div class="wrap">
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <h1 class="mb-1">Notice Board</h1>
+        <p class="mb-0">Centralized updates and announcements for hostel residents</p>
+      </div>
+      <div class="text-end">
+        <button class="btn btn-light" id="btnNewNotice" data-bs-toggle="modal" data-bs-target="#noticeModal">+ Post Notice</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap mb-5">
+  <div class="row g-3">
+    <!-- Left sidebar: filters -->
+    <aside class="col-12 col-md-4 col-lg-3">
+      <div class="panel">
+        <h5 class="section-title">Filters</h5>
+        <div class="mb-3">
+          <input id="searchInput" class="form-control search-input" placeholder="Search notices..." />
+        </div>
+        <div class="mb-3">
+          <h6 class="mb-2">Categories</h6>
+          <div class="category-list d-grid">
+            <button class="btn btn-outline-secondary btn-sm text-start" data-category="all">All</button>
+            <button class="btn btn-outline-secondary btn-sm text-start" data-category="General">General</button>
+            <button class="btn btn-outline-secondary btn-sm text-start" data-category="Maintenance">Maintenance</button>
+            <button class="btn btn-outline-secondary btn-sm text-start" data-category="Event">Event</button>
+            <button class="btn btn-outline-secondary btn-sm text-start" data-category="Emergency">Emergency</button>
+          </div>
+        </div>
+        <div>
+          <h6 class="mb-2">Date range</h6>
+          <input type="date" id="dateFrom" class="form-control form-control-sm mb-2" />
+          <input type="date" id="dateTo" class="form-control form-control-sm" />
+          <div class="mt-3 d-grid">
+            <button id="btnApply" class="btn btn-warning btn-sm">Apply</button>
+            <button id="btnClear" class="btn btn-outline-secondary btn-sm">Clear</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main: notices -->
+    <section class="col-12 col-md-8 col-lg-6">
+      <div class="panel">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="section-title mb-0">Notices</h5>
+          <small class="muted" id="noticeCount">0 notices</small>
+        </div>
+
+        <div id="noticesContainer" class="row g-3">
+          <!-- Notice cards rendered here -->
+        </div>
+
+        <div id="noNotices" class="no-notices d-none">No notices match your filters.</div>
+      </div>
+    </section>
+
+    <!-- Right: recent & archived -->
+    <aside class="col-12 col-lg-3 right-panel">
+      <div class="panel mb-3">
+        <h6 class="section-title">Recent</h6>
+        <div id="recentList">
+          <!-- recent items -->
+        </div>
+      </div>
+
+      <div class="panel">
+        <h6 class="section-title">Archived</h6>
+        <div id="archivedList">
+          <!-- archived items -->
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- Post Notice Modal -->
+<div class="modal fade" id="noticeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Post a New Notice</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="noticeForm">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input id="noticeTitle" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select id="noticeCategory" class="form-select">
+              <option>General</option>
+              <option>Maintenance</option>
+              <option>Event</option>
+              <option>Emergency</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input id="noticeDate" class="form-control" type="date" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Content</label>
+            <textarea id="noticeContent" class="form-control" rows="5" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button id="saveNotice" class="btn btn-warning">Publish</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Simple client-side notice board with localStorage persistence
+    const STORAGE_KEY = 'shms.notices.v1';
+
+    // Utility
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+    // Default sample notices if none exist
+    const sampleNotices = [
+      { id: Date.now() - 2000000, title: 'Welcome to Hostel', category: 'General', date: new Date().toISOString().slice(0,10), content: 'Hostel office hours: 9 AM - 5 PM. Please follow rules and maintain cleanliness.', archived:false },
+      { id: Date.now() - 1200000, title: 'Water Maintenance', category: 'Maintenance', date: new Date().toISOString().slice(0,10), content: 'Water supply will be shut down on Friday 10:00 AM to 2:00 PM for maintenance.', archived:false },
+      { id: Date.now() - 800000, title: 'Annual Cultural Fest', category: 'Event', date: new Date().toISOString().slice(0,10), content: 'All students are invited to participate. Register at the admin office before Thursday.', archived:false }
+    ];
+
+    function loadNotices(){
+      // Try to fetch from backend first, fallback to localStorage
+      try{
+        return fetch('/api/notices').then(r=> r.ok ? r.json() : Promise.reject('no api')).catch(()=>{
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if(!raw) { localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleNotices)); return sampleNotices.slice(); }
+          return JSON.parse(raw);
+        });
+      } catch(e) { console.error(e); const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : sampleNotices.slice(); }
+    }
+
+    function saveNotices(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+
+  // loadNotices may return a Promise if it attempted network fetch
+  let notices = [];
+  const initNotices = async ()=>{ notices = await loadNotices(); renderNotices(); };
+
+    // Rendering
+    function renderNotices(){
+      const container = $('#noticesContainer'); container.innerHTML = '';
+      const recent = $('#recentList'); recent.innerHTML = '';
+      const archived = $('#archivedList'); archived.innerHTML = '';
+
+      const filters = getFilters();
+      const filtered = notices.filter(n => {
+        if(filters.category && filters.category !== 'all' && n.category !== filters.category) return false;
+        if(filters.from && n.date < filters.from) return false;
+        if(filters.to && n.date > filters.to) return false;
+        if(filters.search){ const s=filters.search.toLowerCase(); if(!(n.title.toLowerCase().includes(s) || n.content.toLowerCase().includes(s))) return false; }
+        return true;
+      });
+
+      $('#noticeCount').textContent = filtered.length + ' notices';
+
+      if(filtered.length === 0){ $('#noNotices').classList.remove('d-none'); } else { $('#noNotices').classList.add('d-none'); }
+
+      // main list
+      filtered.sort((a,b)=>b.date.localeCompare(a.date) || b.id - a.id).forEach(n => {
+        const col = document.createElement('div'); col.className = 'col-12';
+        col.innerHTML = `
+          <div class="card notice-card p-3">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h5 class="mb-1">${escapeHtml(n.title)}</h5>
+                <div class="muted"><span class="badge badge-category px-2 me-2">${escapeHtml(n.category)}</span> <small>${n.date}</small></div>
+              </div>
+              <div class="small-actions">
+                <button class="btn btn-outline-secondary btn-sm me-1" data-action="toggle" data-id="${n.id}">${n.archived? 'Unarchive':'Archive'}</button>
+                <button class="btn btn-outline-danger btn-sm" data-action="delete" data-id="${n.id}">Delete</button>
+              </div>
+            </div>
+            <p class="mt-3 mb-0">${escapeHtml(n.content)}</p>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+
+      // recent (3 non-archived)
+      notices.filter(n=>!n.archived).sort((a,b)=>b.date.localeCompare(a.date) || b.id - a.id).slice(0,4).forEach(n=>{
+        const el = document.createElement('div'); el.className='card p-2'; el.innerHTML = `<strong>${escapeHtml(n.title)}</strong><div class="muted">${n.date} • ${escapeHtml(n.category)}</div>`; recent.appendChild(el);
+      });
+
+      // archived
+      notices.filter(n=>n.archived).sort((a,b)=>b.date.localeCompare(a.date) || b.id - a.id).forEach(n=>{
+        const el = document.createElement('div'); el.className='card p-2'; el.innerHTML = `<div class="d-flex justify-content-between"><div><strong>${escapeHtml(n.title)}</strong><div class="muted">${n.date}</div></div><div><button class='btn btn-sm btn-link' data-action="toggle" data-id="${n.id}">Unarchive</button></div></div>`; archived.appendChild(el);
+      });
+
+      // wire up actions
+      $$('.small-actions button, #noticesContainer button, #archivedList button').forEach(btn=>{
+        btn.addEventListener('click', e => {
+          const id = Number(btn.dataset.id);
+          const action = btn.dataset.action || 'delete';
+          if(action === 'toggle') toggleArchive(id);
+          if(action === 'delete') deleteNotice(id);
+        });
+      });
+      // expose for external callers
+      window.renderNotices = renderNotices;
+    }
+
+    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;'); }
+
+    function getFilters(){
+      return {
+        category: document.querySelector('.category-list .btn.active')?.dataset?.category || 'all',
+        search: $('#searchInput').value.trim(),
+        from: $('#dateFrom').value || null,
+        to: $('#dateTo').value || null
+      };
+    }
+
+    // Actions
+    function addNotice(payload){
+      notices.push(payload); saveNotices(notices); renderNotices();
+    }
+
+    function toggleArchive(id){
+      const idx = notices.findIndex(n=>n.id===id); if(idx<0) return;
+      notices[idx].archived = !notices[idx].archived; saveNotices(notices); renderNotices();
+    }
+
+    function deleteNotice(id){
+      if(!confirm('Delete this notice?')) return; notices = notices.filter(n=>n.id!==id); saveNotices(notices); renderNotices();
+    }
+
+    // Event listeners for filters
+    document.addEventListener('click', e=>{
+      const btn = e.target.closest('.category-list .btn'); if(btn){ $$('.category-list .btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderNotices(); }
+    });
+    $('#btnApply').addEventListener('click', ()=>renderNotices());
+    $('#btnClear').addEventListener('click', ()=>{ $('#dateFrom').value=''; $('#dateTo').value=''; $('#searchInput').value=''; $$('.category-list .btn').forEach(b=>b.classList.remove('active')); $$('.category-list .btn')[0].classList.add('active'); renderNotices(); });
+    $('#searchInput').addEventListener('input', ()=>renderNotices());
+
+    // Modal save
+    $('#saveNotice').addEventListener('click', ()=>{
+      const title = $('#noticeTitle').value.trim();
+      const category = $('#noticeCategory').value; const date = $('#noticeDate').value; const content = $('#noticeContent').value.trim();
+      if(!title || !date || !content){ alert('Please complete title, date and content'); return; }
+      const newNotice = { id: Date.now(), title, category, date, content, archived:false };
+      addNotice(newNotice);
+      // reset form & close modal
+      $('#noticeForm').reset();
+      const modalEl = document.getElementById('noticeModal'); const modal = bootstrap.Modal.getInstance(modalEl); modal.hide();
+    });
+
+    // init
+    (function init(){
+      // ensure a category button is active by default
+      $$('.category-list .btn')[0].classList.add('active');
+      initNotices();
+    })();
+  </script>
+</body>
+</html>

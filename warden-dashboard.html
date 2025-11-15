@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Warden Dashboard | SHMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+</head>
+<body>
+<nav class="navbar navbar-dark" style="background:linear-gradient(90deg,#ff8800,#ffb366);position:fixed;top:0;left:0;right:0;z-index:1030">
+  <div class="container-fluid wrap d-flex align-items-center">
+    <button class="btn btn-sm btn-light me-2" data-toggle="sidebar"><i class="fa fa-bars"></i></button>
+    <a class="navbar-brand" href="#">SHMS Warden</a>
+    <div class="ms-auto d-flex align-items-center text-white">
+      <div class="me-2">Warden Name</div>
+      <a class="btn btn-outline-light btn-sm ms-2" href="login.html">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap d-flex mt-5">
+  <aside id="mainSidebar" class="sidebar col-12 col-lg-3 d-none d-lg-block">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link active" href="#"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="#outpasses"><i class="fa fa-road me-2"></i>Approve Outpasses</a></li>
+      <li class="nav-item"><a class="nav-link" href="#complaints"><i class="fa fa-exclamation-circle me-2"></i>Resolve Complaints</a></li>
+      <li class="nav-item"><a class="nav-link" href="#reports"><i class="fa fa-chart-line me-2"></i>Reports</a></li>
+    </ul>
+  </aside>
+
+  <main class="col-12 col-lg-9 main-content">
+    <div class="row mb-3">
+      <div class="col-md-4 mb-3"><div class="p-3 stat-card"><h6>Pending Outpasses</h6><h4>5</h4></div></div>
+      <div class="col-md-4 mb-3"><div class="p-3 stat-card"><h6>Pending Complaints</h6><h4>12</h4></div></div>
+      <div class="col-md-4 mb-3"><div class="p-3 stat-card"><h6>Reports</h6><h4>3</h4></div></div>
+    </div>
+
+    <div id="outpasses" class="card panel mb-3">
+      <div class="card-body">
+        <h5>Pending Outpasses</h5>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead><tr><th>#</th><th>Student</th><th>Date</th><th>Type</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Anita</td><td>2025-11-05</td><td>Home</td><td><button class="btn btn-sm btn-success me-1">Approve</button><button class="btn btn-sm btn-danger">Reject</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="complaints" class="card panel mb-3">
+      <div class="card-body">
+        <h5>Complaint Status</h5>
+        <table class="table table-sm">
+          <thead><tr><th>#</th><th>Issue</th><th>Student</th><th>Status</th><th>Update</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Wi-Fi</td><td>Ramesh</td><td><span class="badge bg-warning">In Progress</span></td><td><button class="btn btn-sm btn-outline-success">Mark Resolved</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="footer">© 2025 SHMS — Warden</footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+// Demo handlers
+Array.from(document.querySelectorAll('#outpasses .btn')).forEach(b=>b.addEventListener('click', ()=>{ showToast('Action recorded (demo)'); }));
+</script>
+</body>
+</html>

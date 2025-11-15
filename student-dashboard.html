@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Dashboard | SHMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+</head>
+<body>
+<nav class="navbar navbar-dark" style="background:linear-gradient(90deg,#ff8800,#ffb366);position:fixed;top:0;left:0;right:0;z-index:1030">
+  <div class="container-fluid wrap d-flex align-items-center">
+    <button class="btn btn-sm btn-light me-2" data-toggle="sidebar"><i class="fa fa-bars"></i></button>
+    <a class="navbar-brand" href="#">SHMS Student</a>
+    <div class="ms-auto d-flex align-items-center text-white">
+      <div class="me-2">Hello, Student</div>
+      <a class="btn btn-outline-light btn-sm ms-2" href="login.html">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap d-flex mt-5">
+  <aside id="mainSidebar" class="sidebar col-12 col-lg-3 d-none d-lg-block">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link active" href="#profile"><i class="fa fa-user me-2"></i>Profile</a></li>
+      <li class="nav-item"><a class="nav-link" href="#complaints"><i class="fa fa-exclamation-circle me-2"></i>Complaints</a></li>
+      <li class="nav-item"><a class="nav-link" href="#mess"><i class="fa fa-utensils me-2"></i>Mess Feedback</a></li>
+      <li class="nav-item"><a class="nav-link" href="#outpass"><i class="fa fa-road me-2"></i>Outpass Request</a></li>
+      <li class="nav-item"><a class="nav-link" href="notice-board.html"><i class="fa fa-sticky-note me-2"></i>Notices</a></li>
+    </ul>
+  </aside>
+
+  <main class="col-12 col-lg-9 main-content">
+    <div class="card panel mb-3">
+      <div class="card-body">
+        <h5>Profile</h5>
+        <div class="row">
+          <div class="col-md-4"><div class="p-3 stat-card"><h6 class="user-name">Ravi Kumar</h6><div class="text-muted-small user-room">Room 101</div></div></div>
+          <div class="col-md-8">
+            <div class="mt-2">Email: <span class="user-email">ravi@uni.edu</span></div>
+            <div class="mt-1">Phone: <span class="user-phone">+91 98765 43210</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="complaints" class="card panel mb-3">
+      <div class="card-body">
+        <h5>Submit a Complaint</h5>
+        <form id="complaintForm">
+          <div class="form-floating mb-2">
+            <select id="complaintCategory" class="form-select"><option>Electricity</option><option>Wi-Fi</option><option>Plumbing</option></select>
+            <label for="complaintCategory">Category</label>
+          </div>
+          <div class="form-floating mb-2"><textarea id="complaintText" class="form-control" style="height:100px" placeholder="Describe your complaint"></textarea><label for="complaintText">Details</label></div>
+          <div class="d-flex justify-content-end"><button class="btn btn-accent" id="submitComplaint">Submit</button></div>
+        </form>
+      </div>
+    </div>
+
+    <div id="outpass" class="card panel mb-3">
+      <div class="card-body">
+        <h5>Request Outpass</h5>
+        <form id="outpassForm">
+          <div class="form-floating mb-2"><select id="outType" class="form-select"><option>Day Outing</option><option>Home Outing</option></select><label for="outType">Outpass Type</label></div>
+          <div class="form-floating mb-2"><input id="outDate" type="date" class="form-control" placeholder="Date"><label for="outDate">Date</label></div>
+          <div class="form-floating mb-2"><input id="outTime" type="time" class="form-control" placeholder="Time"><label for="outTime">Expected Time</label></div>
+          <div class="form-floating mb-2"><textarea id="outReason" class="form-control" placeholder="Reason" style="height:100px"></textarea><label for="outReason">Reason</label></div>
+          <div class="d-flex justify-content-end"><button class="btn btn-accent" id="submitOutpass">Apply</button></div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">© 2025 SHMS — Student</footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+document.getElementById('submitComplaint').addEventListener('click', function(e){ e.preventDefault(); showToast('Complaint submitted (demo)'); });
+document.getElementById('submitOutpass').addEventListener('click', function(e){ e.preventDefault(); showToast('Outpass requested (demo)'); });
+</script>
+</body>
+</html>

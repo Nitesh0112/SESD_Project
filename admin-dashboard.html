@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard | SHMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>.main-content{padding-top:20px}.sidebar .nav-link i{width:18px}</style>
+</head>
+<body>
+<nav class="navbar navbar-dark" style="background:linear-gradient(90deg,#ff8800,#ffb366);position:fixed;top:0;left:0;right:0;z-index:1030">
+  <div class="container-fluid wrap d-flex align-items-center">
+    <button class="btn btn-sm btn-light me-2" data-toggle="sidebar"><i class="fa fa-bars"></i></button>
+    <a class="navbar-brand" href="#">SHMS Admin</a>
+    <div class="ms-auto d-flex align-items-center text-white">
+      <div class="me-3">Admin Name</div>
+      <div class="me-2 position-relative">
+        <i class="fa fa-bell"></i>
+        <span class="badge bg-danger position-absolute" style="top:-6px;right:-8px">3</span>
+      </div>
+      <a class="btn btn-outline-light btn-sm ms-2" href="login.html">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap d-flex mt-5">
+  <aside id="mainSidebar" class="sidebar col-12 col-lg-3 d-none d-lg-block">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link active" href="#"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="#students"><i class="fa fa-users me-2"></i>Manage Students</a></li>
+      <li class="nav-item"><a class="nav-link" href="#rooms"><i class="fa fa-door-closed me-2"></i>Rooms</a></li>
+      <li class="nav-item"><a class="nav-link" href="#complaints"><i class="fa fa-exclamation-circle me-2"></i>Complaints</a></li>
+      <li class="nav-item"><a class="nav-link" href="#mess"><i class="fa fa-utensils me-2"></i>Mess Feedback</a></li>
+      <li class="nav-item"><a class="nav-link" href="#outpasses"><i class="fa fa-road me-2"></i>Outpasses</a></li>
+      <li class="nav-item"><a class="nav-link" href="notice-board.html"><i class="fa fa-sticky-note me-2"></i>Notices</a></li>
+      <li class="nav-item"><a class="nav-link" href="#reports"><i class="fa fa-chart-line me-2"></i>Reports</a></li>
+    </ul>
+  </aside>
+
+  <main class="col-12 col-lg-9 main-content">
+    <div class="row" id="statsRow">
+      <!-- Stats cards populated by assets/js/app.js sample JSON -->
+      <div class="col-6 col-md-3 mb-3"><div class="p-3 stat-card"><h5>120</h5><div class="text-muted-small">Total Students</div></div></div>
+      <div class="col-6 col-md-3 mb-3"><div class="p-3 stat-card"><h5>24</h5><div class="text-muted-small">Pending Complaints</div></div></div>
+      <div class="col-6 col-md-3 mb-3"><div class="p-3 stat-card"><h5>8</h5><div class="text-muted-small">Available Rooms</div></div></div>
+      <div class="col-6 col-md-3 mb-3"><div class="p-3 stat-card"><h5>5</h5><div class="text-muted-small">Pending Outpasses</div></div></div>
+    </div>
+
+    <div class="card panel mb-3">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Students</h5>
+        <div>
+          <button class="btn btn-outline-secondary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#addRoomModal"><i class="fa fa-plus me-1"></i> Add Room</button>
+          <button class="btn btn-accent btn-sm" data-bs-toggle="modal" data-bs-target="#addNoticeModal"><i class="fa fa-sticky-note me-1"></i> Add Notice</button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead class="table-light"><tr><th>ID</th><th>Name</th><th>Room</th><th>Email</th><th>Actions</th></tr></thead>
+          <tbody id="studentsTbody">
+            <!-- SAMPLE DATA (replace with backend fetch) -->
+            <tr><td>1</td><td>Ravi Kumar</td><td>101</td><td>ravi@uni.edu</td><td><button class="btn btn-sm btn-outline-primary">View</button> <button class="btn btn-sm btn-outline-warning">Edit</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card panel mb-3">
+          <div class="card-body">
+            <h5>Complaints</h5>
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead><tr><th>#</th><th>Category</th><th>Student</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Plumbing</td><td>Kiran</td><td><span class="badge bg-warning">Pending</span></td><td><button class="btn btn-sm btn-outline-success">Resolve</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">© 2025 SHMS — Admin</footer>
+  </main>
+</div>
+
+<!-- Add Room Modal -->
+<div class="modal fade" id="addRoomModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Add Room</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
+  <form id="addRoomForm">
+    <div class="form-floating mb-2"><input id="roomNo" class="form-control" placeholder="Room No" required><label for="roomNo">Room Number</label></div>
+    <div class="form-floating mb-2"><input id="roomBlock" class="form-control" placeholder="Block/Floor"><label for="roomBlock">Block/Floor</label></div>
+    <div class="form-floating mb-2"><input id="roomCapacity" type="number" class="form-control" placeholder="Capacity"><label for="roomCapacity">Capacity</label></div>
+  </form>
+</div><div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" id="saveRoomBtn">Save Room</button></div></div></div></div>
+
+<!-- Add Notice Modal -->
+<div class="modal fade" id="addNoticeModal" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Add Notice</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
+  <form id="adminNoticeForm">
+    <div class="form-floating mb-2"><input id="noticeTitleAdmin" class="form-control" placeholder="Title"><label for="noticeTitleAdmin">Title</label></div>
+    <div class="form-floating mb-2"><select id="noticeCategoryAdmin" class="form-select"><option>General</option><option>Event</option><option>Maintenance</option></select><label for="noticeCategoryAdmin">Category</label></div>
+    <div class="form-floating mb-2"><textarea id="noticeContentAdmin" class="form-control" style="height:120px" placeholder="Content"></textarea><label for="noticeContentAdmin">Content</label></div>
+  </form>
+</div><div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" id="postAdminNotice">Publish</button></div></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+// Example placeholder sample JSON for dashboard -- replace with backend fetch
+const sampleJson = {
+  stats:[{label:'Total Students',value:120},{label:'Pending Complaints',value:24},{label:'Available Rooms',value:8},{label:'Pending Outpasses',value:5}],
+  students:[{id:1,name:'Ravi Kumar',room:'101',email:'ravi@uni.edu'}]
+};
+// Insert sample JSON into DOM for app.js to pick up if needed
+const sj = document.createElement('script'); sj.type='application/json'; sj.id='sample-json'; sj.textContent = JSON.stringify(sampleJson); document.body.appendChild(sj);
+
+// Wire up modals with toast messages (demo behaviour)
+document.getElementById('saveRoomBtn').addEventListener('click', ()=>{ showToast('Room saved (demo).'); const m = bootstrap.Modal.getInstance(document.getElementById('addRoomModal')); m.hide(); });
+document.getElementById('postAdminNotice').addEventListener('click', ()=>{ showToast('Notice published (demo).'); const m = bootstrap.Modal.getInstance(document.getElementById('addNoticeModal')); m.hide(); });
+</script>
+</body>
+</html>
